@@ -95,5 +95,7 @@ curl -X GET 'http://localhost:9200'
 
 ## Install python client:
 ```bash
-python -m pip install elasticsearch
+sudo apt install python3 -y
+sudo apt install python3-pip -y
+pip install -r requirements.txt
 ```
