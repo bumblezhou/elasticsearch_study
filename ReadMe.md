@@ -30,6 +30,58 @@ sudo systemctl start elasticsearch
 sudo systemctl enable elasticsearch
 ```
 
+## Enable basic security:
+```bash
+sudo nano /etc/elasticsearch/elasticsearch.yml
+
+. . .
+# ---------------------------------- Security ----------------------------------
+#
+#                                 *** WARNING ***
+#
+# Elasticsearch security features are not enabled by default.
+# These features are free, but require configuration changes to enable them.
+# This means that users don't have to provide credentials and can get full access
+# to the cluster. Network connections are also not encrypted.
+#
+# To protect your data, we strongly encourage you to enable the Elasticsearch security features. 
+# Refer to the following documentation for instructions.
+#
+# https://www.elastic.co/guide/en/elasticsearch/reference/7.16/configuring-stack-security.html
+
+# Enable basic security
+xpack.security.enabled: true
+
+CTRL + X
+y, Enter
+
+sudo systemctl restart elasticsearch
+export ES_HOME=/usr/share/elasticsearch
+sudo $ES_HOME/bin/elasticsearch-setup-passwords auto
+y, Enter
+
+Changed password for user apm_system
+PASSWORD apm_system = ZzrSBOln7ObEpYa283Iy
+
+Changed password for user kibana_system
+PASSWORD kibana_system = AJ2QIFkCltCn0QQq2RhO
+
+Changed password for user kibana
+PASSWORD kibana = AJ2QIFkCltCn0QQq2RhO
+
+Changed password for user logstash_system
+PASSWORD logstash_system = 2qLfH0XgAGgktFiqQPQy
+
+Changed password for user beats_system
+PASSWORD beats_system = 79Zp3CwSUAOwBm23Gkw5
+
+Changed password for user remote_monitoring_user
+PASSWORD remote_monitoring_user = cgGgK0DYjCutI0yJP2TH
+
+Changed password for user elastic
+PASSWORD elastic = usKuJ3daCL4vf98kQ0Dk
+```
+
 ## Enable port:
 ```bash
 sudo ufw allow 9200
